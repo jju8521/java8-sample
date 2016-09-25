@@ -1,4 +1,4 @@
-package yong.java8.sample;
+package yong.java8;
 
 /**
  * Created by yongju on 16. 9. 25.

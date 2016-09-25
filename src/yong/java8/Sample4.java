@@ -1,8 +1,5 @@
-package yong.java8.sample;
+package yong.java8;
 
-import com.sun.javafx.sg.prism.web.NGWebView;
-
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

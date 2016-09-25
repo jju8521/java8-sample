@@ -1,4 +1,4 @@
-package yong.java8.sample;
+package yong.java8;
 
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
