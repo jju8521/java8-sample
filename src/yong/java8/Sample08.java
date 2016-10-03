@@ -3,7 +3,7 @@ package yong.java8;
 /**
  * Created by yongju on 16. 10. 2.
  */
-public class Sample8 {
+public class Sample08 {
     public static void main(String[] args) {
         final CalculatorService1 calculatorService1 = new CalculatorService1();
         System.out.println("[1+1] : " + calculatorService1.calculate(1, 1));

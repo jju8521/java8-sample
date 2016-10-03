@@ -14,16 +14,16 @@ import java.util.function.Predicate;
 /**
  * Created by yongju on 16. 9. 25.
  */
-public class Sample7 {
+public class Sample07 {
     public static void main(String[] args) {
-        BigDecimalToCurrency1 bigDecimalToCurrency = bd -> "$"+bd.toString();
+        BigDecimalToCurrency1 bigDecimalToCurrency = bd -> "$" + bd.toString();
 
         System.out.println(bigDecimalToCurrency.toCurrency(new BigDecimal("120.00")));
 
         final BigDecimalToCurrency2 bigDecimalToCurrency2 = new BigDecimalToCurrency2() {
             @Override
             public <T> String toCurrency(T value) {
-                return "$"+value.toString();
+                return "$" + value.toString();
             }
         };
         System.out.println(bigDecimalToCurrency2.toCurrency(new BigDecimal("130.00")));
@@ -45,7 +45,7 @@ public class Sample7 {
                 product5
         );
 
-        System.out.println("[Products : "+products);
+        System.out.println("[Products : " + products);
 
         BigDecimal twenty = new BigDecimal("20");
         List<Product> result = new ArrayList<>();
@@ -55,12 +55,12 @@ public class Sample7 {
             }
         }
 
-        System.out.println("[price >= 20] : "+result);
+        System.out.println("[price >= 20] : " + result);
 
         List<Product> result2 = filter(products, product -> product.getPrice().compareTo(twenty) >= 0);
-        System.out.println("[price >= 20] : "+result2);
+        System.out.println("[price >= 20] : " + result2);
 
-        System.out.println("[price <= 10] : "+
+        System.out.println("[price <= 10] : " +
                 filter(products, product -> product.getPrice().compareTo(new BigDecimal("10")) < 1));
 
         final List<Product> expensiveProducts = filter(products, product -> product.getPrice().compareTo(new BigDecimal("50")) > 0);
@@ -71,12 +71,12 @@ public class Sample7 {
                     new DiscountedProduct(product.getId(), product.getName(), product.getPrice().multiply(new BigDecimal("0.5"))));
         }
 
-        System.out.println("[expensiveProducts] : "+expensiveProducts);
-        System.out.println("[discountedProducts] : "+discountedProducts);
+        System.out.println("[expensiveProducts] : " + expensiveProducts);
+        System.out.println("[discountedProducts] : " + discountedProducts);
 
         final List<DiscountedProduct> discountedProducts2 = map(expensiveProducts,
                 product -> new DiscountedProduct(product.getId(), product.getName(), product.getPrice().multiply(new BigDecimal("0.5"))));
-        System.out.println("[discountedProducts2] : "+discountedProducts2);
+        System.out.println("[discountedProducts2] : " + discountedProducts2);
 
 
         // error
@@ -85,9 +85,9 @@ public class Sample7 {
         // 2. filter method 의 Predicate<T> predicate 를 Predicate<? super T> predicate 변경.
 //        Predicate<DiscountedProduct> discountedProductPredicate = prouct -> prouct.getPrice().compareTo(new BigDecimal("30")) <= 0;
         Predicate<Product> discountedProductPredicate = prouct -> prouct.getPrice().compareTo(new BigDecimal("30")) <= 0;
-        System.out.println("[discountedProducts2 <= 30] : "+
+        System.out.println("[discountedProducts2 <= 30] : " +
                 filter(discountedProducts2, discountedProductPredicate));
-        System.out.println("[products <= 30] : "+
+        System.out.println("[products <= 30] : " +
                 filter(products, discountedProductPredicate));
 
         // total 가격의 합 구하기.
@@ -97,10 +97,10 @@ public class Sample7 {
             total = total.add(price);
         }
 
-        System.out.println("[total] : "+total);
+        System.out.println("[total] : " + total);
 
-        System.out.println("[total] : "+total(products, product -> product.getPrice()));
-        System.out.println("[Discounted Total] : "+total(discountedProducts2, product -> product.getPrice()));
+        System.out.println("[total] : " + total(products, product -> product.getPrice()));
+        System.out.println("[Discounted Total] : " + total(discountedProducts2, product -> product.getPrice()));
 
 
         Order order = new Order(1L, "on-1234", Arrays.asList(
@@ -109,7 +109,7 @@ public class Sample7 {
                 new OrderedItem(1L, product4, 10)
         ));
 
-        System.out.println("[order total] : "+order.totalPrice());
+        System.out.println("[order total] : " + order.totalPrice());
     }
 
     private static <T> BigDecimal total(List<T> list, Function<T, BigDecimal> mapper) {
@@ -130,7 +130,7 @@ public class Sample7 {
         return result;
     }
 
-    private static  <T> List<T> filter(List<T> list, Predicate<? super T> predicate) {
+    private static <T> List<T> filter(List<T> list, Predicate<? super T> predicate) {
         List<T> result = new ArrayList<>();
         for (final T t : list) {
             if (predicate.test(t)) {
@@ -189,6 +189,6 @@ public class Sample7 {
     // lambda expression (X) -> generic method
     @FunctionalInterface
     interface BigDecimalToCurrency2 {
-        <T>  String toCurrency(T value);
+        <T> String toCurrency(T value);
     }
 }

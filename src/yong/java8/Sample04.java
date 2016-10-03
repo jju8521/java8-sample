@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 /**
  * Created by yongju on 16. 9. 23.
  */
-public class Sample4 {
+public class Sample04 {
     public static void main(String[] args) {
         Predicate<Integer> isPositive1 = new Predicate<Integer>() {
             @Override
@@ -21,18 +21,18 @@ public class Sample4 {
             }
         };
 
-        System.out.println("isPositive1.test(1) : "+isPositive1.test(1));
-        System.out.println("isPositive1.test(0) : "+isPositive1.test(0));
-        System.out.println("isPositive1.test(-1) : "+isPositive1.test(-1));
+        System.out.println("isPositive1.test(1) : " + isPositive1.test(1));
+        System.out.println("isPositive1.test(0) : " + isPositive1.test(0));
+        System.out.println("isPositive1.test(-1) : " + isPositive1.test(-1));
 
         Predicate<Integer> isPositive2 = i -> i > 0;
 
-        System.out.println("isPositive2.test(1) : "+isPositive2.test(1));
-        System.out.println("isPositive2.test(0) : "+isPositive2.test(0));
-        System.out.println("isPositive2.test(-1) : "+isPositive2.test(-1));
+        System.out.println("isPositive2.test(1) : " + isPositive2.test(1));
+        System.out.println("isPositive2.test(0) : " + isPositive2.test(0));
+        System.out.println("isPositive2.test(-1) : " + isPositive2.test(-1));
 
         List<Integer> numbers = Arrays.asList(-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5);
-        System.out.println("numbers: "+numbers);
+        System.out.println("numbers: " + numbers);
 
         List<Integer> positiveNumbers = new ArrayList<>();
         for (Integer number : numbers) {
@@ -41,7 +41,7 @@ public class Sample4 {
             }
         }
 
-        System.out.println("positive numbers: "+positiveNumbers);
+        System.out.println("positive numbers: " + positiveNumbers);
 
         Predicate<Integer> lessThan3 = i -> i < 3;
         List<Integer> numbersLessThan3 = new ArrayList<>();
@@ -51,13 +51,13 @@ public class Sample4 {
             }
         }
 
-        System.out.println("lessThan3 numbers: "+numbersLessThan3);
+        System.out.println("lessThan3 numbers: " + numbersLessThan3);
 
-        System.out.println("positive number - 2 : "+filter(numbers, isPositive2));
-        System.out.println("lessThan3 number - 2 : "+filter(numbers, lessThan3));
+        System.out.println("positive number - 2 : " + filter(numbers, isPositive2));
+        System.out.println("lessThan3 number - 2 : " + filter(numbers, lessThan3));
 
-        System.out.println("positive number - 3 : "+filter(numbers, i -> i > 0));
-        System.out.println("lessThan3 number - 3 : "+filter(numbers, i -> i < 3));
+        System.out.println("positive number - 3 : " + filter(numbers, i -> i > 0));
+        System.out.println("lessThan3 number - 3 : " + filter(numbers, i -> i < 3));
     }
 
     private static <T> List<T> filter(List<T> list, Predicate<T> filter) {

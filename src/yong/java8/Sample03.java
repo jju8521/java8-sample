@@ -6,7 +6,7 @@ import java.util.function.Function;
 /**
  * Created by yongju on 16. 9. 22.
  */
-public class Sample3 {
+public class Sample03 {
     public static void main(String[] args) {
         final Consumer<String> print = new Consumer<String>() {
             @Override
@@ -22,7 +22,7 @@ public class Sample3 {
 
 //        final Function<String, Void> print3 = value -> System.out.println(value);
 
-        final Consumer<String> greetings = value -> System.out.println("[greetings] hello "+value);
+        final Consumer<String> greetings = value -> System.out.println("[greetings] hello " + value);
         greetings.accept("consumer");
     }
 }
