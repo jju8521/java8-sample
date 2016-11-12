@@ -134,13 +134,16 @@ public class Sample19 {
          * A Function can be stored in the data structure
          */
         // Using Lamba Expression, Using Method Reference
-        final List<Function<Integer, String>> fsl = Arrays.asList(i -> String.valueOf(i * 2), Sample19::doubleThenToString);
+        final List<Function<Integer, String>> fsl =
+                Arrays.asList(
+                        i -> String.valueOf(i * 2),
+                        Sample19::doubleThenToString,
+                        Sample19::addHashPrefix);
         int targetInt = 235;
         System.out.println("\ntargetInt : " + targetInt);
         for (final Function<Integer, String> f : fsl) {
             final String result = f.apply(targetInt);
             System.out.println("result : " + result);
-            targetInt = Integer.valueOf(result);
         }
 
         // Using Lambda Expression
@@ -169,6 +172,10 @@ public class Sample19 {
 
     private static Function<Integer, String> getDoubleThenToStringUsingMethodReference() {
         return Sample19::doubleThenToString;
+    }
+
+    private static String addHashPrefix(int number) {
+        return "#"+number;
     }
 }
 
