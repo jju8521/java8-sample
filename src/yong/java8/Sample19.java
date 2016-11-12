@@ -3,6 +3,7 @@ package yong.java8;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
 
@@ -77,7 +78,7 @@ public class Sample19 {
         );
 
         final List<String> strings = Arrays.asList("a", "b", "c", "d");
-        System.out.println("\nstrings : "+strings);
+        System.out.println("\nstrings : " + strings);
         System.out.println(
                 "strings.stream()\n" +
                         "     .anyMatch(x -> x.equals(\"c\"))\n" +
@@ -88,13 +89,86 @@ public class Sample19 {
         final String targetString = "c";
         System.out.println(
                 "\nstrings.stream()\n" +
-                        "     .anyMatch(targetString::equals)\n"+
-                strings.stream()
+                        "     .anyMatch(targetString::equals)\n" +
+                        strings.stream()
 //                        .anyMatch(String::equals)
-                        .anyMatch(targetString::equals)
+                                .anyMatch(targetString::equals)
         );
 
+        System.out.println();
+        methodReference();
+    }
 
+    private static void methodReference() {
+        // First Class Function
+
+        /**
+         * Function can be passes as a parameter to another function
+         */
+        // Using Lambda Expression
+        System.out.println(
+                "testFirstClassFunction(3, i -> String.valueOf(i * 2)) : \n" +
+                        testFirstClassFunction(3, i -> String.valueOf(i * 2))
+        );
+
+        // Using Method Reference
+        System.out.println(
+                "testFirstClassFunction(5, Sample19::doubleThenToString) : \n" +
+                        testFirstClassFunction(5, Sample19::doubleThenToString)
+        );
+
+        /**
+         *  A Function can be returned as the result of another function.
+         */
+        //Using Lambda Expression
+        final Function<Integer, String> fl = getDoubleThenToStringUsingLambdaExpression();
+        System.out.println("\nfl : " + fl);
+        System.out.println("fl.apply(16) : " + fl.apply(16));
+
+        //Using Method Reference
+        final Function<Integer, String> fmr = getDoubleThenToStringUsingMethodReference();
+        System.out.println("\nfmr : " + fmr);
+        System.out.println("fmr.apply(15) : " + fmr.apply(15));
+
+        /**
+         * A Function can be stored in the data structure
+         */
+        // Using Lamba Expression, Using Method Reference
+        final List<Function<Integer, String>> fsl = Arrays.asList(i -> String.valueOf(i * 2), Sample19::doubleThenToString);
+        int targetInt = 235;
+        System.out.println("\ntargetInt : " + targetInt);
+        for (final Function<Integer, String> f : fsl) {
+            final String result = f.apply(targetInt);
+            System.out.println("result : " + result);
+            targetInt = Integer.valueOf(result);
+        }
+
+        // Using Lambda Expression
+        final Function<Integer, String> fl2 = i -> String.valueOf(i * 2);
+        System.out.println("\nfl2 : " + fl2);
+        System.out.println("fl2.apply(394) : " + fl2.apply(394));
+
+        // Using Method Reference
+        final Function<Integer, String> fml2 = Sample19::doubleThenToString;
+        System.out.println("\nfml2 : " + fml2);
+        System.out.println("fml2.apply(832) : " + fml2.apply(832));
+    }
+
+    private static String testFirstClassFunction(int n, Function<Integer, String> f) {
+//        System.out.println("[testFirstClassFunction] f : "+f);
+        return "The result is " + f.apply(n);
+    }
+
+    private static String doubleThenToString(int i) {
+        return String.valueOf(i * 2);
+    }
+
+    private static Function<Integer, String> getDoubleThenToStringUsingLambdaExpression() {
+        return i -> String.valueOf(i * 2);
+    }
+
+    private static Function<Integer, String> getDoubleThenToStringUsingMethodReference() {
+        return Sample19::doubleThenToString;
     }
 }
 
