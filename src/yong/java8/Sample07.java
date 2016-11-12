@@ -141,6 +141,18 @@ public class Sample07 {
         return result;
     }
 
+    @FunctionalInterface
+    interface BigDecimalToCurrency1 {
+        String toCurrency(BigDecimal value);
+    }
+
+    // Invalid Functional Interface
+    // lambda expression (X) -> generic method
+    @FunctionalInterface
+    interface BigDecimalToCurrency2 {
+        <T> String toCurrency(T value);
+    }
+
     @AllArgsConstructor
     @Data
     static class Product {
@@ -178,17 +190,5 @@ public class Sample07 {
         public BigDecimal getItemTotal() {
             return product.getPrice().multiply(new BigDecimal(quuantity));
         }
-    }
-
-    @FunctionalInterface
-    interface BigDecimalToCurrency1 {
-        String toCurrency(BigDecimal value);
-    }
-
-    // Invalid Functional Interface
-    // lambda expression (X) -> generic method
-    @FunctionalInterface
-    interface BigDecimalToCurrency2 {
-        <T> String toCurrency(T value);
     }
 }

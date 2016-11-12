@@ -31,7 +31,7 @@ public class Sample13 {
 
         // stream sum no side effeect
         System.out.println("stream sum : " +
-                 IntStream.range(0, 100)
+                IntStream.range(0, 100)
                         .sum()
         );
 
@@ -56,7 +56,7 @@ public class Sample13 {
                     return integer;
                 })
                 .forEach(i -> System.out.print(i));
-        System.out.println("\n"+(System.currentTimeMillis() - start)+" ms");
+        System.out.println("\n" + (System.currentTimeMillis() - start) + " ms");
 
         // core 가 8개인 pc 에서는 1초만에 실행됨.
         parallel("Parallel Stream (8 elements)", 8);
@@ -72,7 +72,7 @@ public class Sample13 {
         final long start = System.currentTimeMillis();
 //        Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8)
 //                .parallelStream()
-        IntStream.iterate(1, i -> i+1)
+        IntStream.iterate(1, i -> i + 1)
                 .limit(limit)
                 .parallel()
                 .map(integer -> {
@@ -84,6 +84,6 @@ public class Sample13 {
                     return integer;
                 })
                 .forEach(i -> System.out.print(i));
-        System.out.println("\n"+(System.currentTimeMillis() - start)+" ms");
+        System.out.println("\n" + (System.currentTimeMillis() - start) + " ms");
     }
 }

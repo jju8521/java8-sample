@@ -175,7 +175,7 @@ public class Sample19 {
     }
 
     private static String addHashPrefix(int number) {
-        return "#"+number;
+        return "#" + number;
     }
 }
 

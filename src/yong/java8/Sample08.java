@@ -1,5 +1,9 @@
 package yong.java8;
 
+interface Calculation {
+    int calculate(final int num1, final int num2);
+}
+
 /**
  * Created by yongju on 16. 10. 2.
  */
@@ -94,10 +98,6 @@ class CalculatorService2 {
             throw new IllegalArgumentException("Unknown calculation : " + calculation);
         }
     }
-}
-
-interface Calculation {
-    int calculate(final int num1, final int num2);
 }
 
 class Addition implements Calculation {

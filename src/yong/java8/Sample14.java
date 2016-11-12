@@ -1,7 +1,10 @@
 package yong.java8;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import java.util.stream.LongStream;
@@ -11,6 +14,23 @@ import java.util.stream.Stream;
  * Created by yongju on 2016. 10. 16..
  */
 public class Sample14 {
+
+    private static final String[] PRICES = {"1.0", "100.99", "35.75", "21.30", "88.00"};
+    private static final BigDecimal[] TARGET_PRICES = {new BigDecimal("30"), new BigDecimal("20"), new BigDecimal("50")};
+    private static final Random TARGET_PRICES_RANDOM = new Random(111);
+    private static final Random RANDOM = new Random(123);
+    private static final List<Product> PRODUCT_LIST;
+
+    static {
+        final int length = 8_000_000;
+        final Product[] productList = new Product[length];
+
+        for (int i = 0; i < length; i++) {
+            productList[i] = (new Product((long) i, "Product_" + i, new BigDecimal(PRICES[RANDOM.nextInt(5)])));
+        }
+
+        PRODUCT_LIST = Collections.unmodifiableList(Arrays.asList(productList));
+    }
 
     public static void slowDown() {
         try {
@@ -147,24 +167,6 @@ public class Sample14 {
         System.out.println(System.currentTimeMillis() - start10 + "ms");
     }
 
-    private static final String[] PRICES = {"1.0", "100.99", "35.75", "21.30", "88.00"};
-    private static final BigDecimal[] TARGET_PRICES = {new BigDecimal("30"), new BigDecimal("20"), new BigDecimal("50")};
-    private static final Random TARGET_PRICES_RANDOM = new Random(111);
-    private static final Random RANDOM = new Random(123);
-
-    private static final List<Product> PRODUCT_LIST;
-
-    static {
-        final int length = 8_000_000;
-        final Product[] productList = new Product[length];
-
-        for (int i = 0; i < length; i++) {
-            productList[i] = (new Product((long) i, "Product_" + i, new BigDecimal(PRICES[RANDOM.nextInt(5)])));
-        }
-
-        PRODUCT_LIST = Collections.unmodifiableList(Arrays.asList(productList));
-    }
-
     private static BigDecimal imperativeSum(List<Product> productList, Predicate<Product> predicate) {
         BigDecimal sum = BigDecimal.ZERO;
         for (final Product product : productList) {
@@ -186,15 +188,15 @@ public class Sample14 {
 
         System.out.println("======================================");
         long start = System.currentTimeMillis();
-        System.out.println("[parallelStreamSum]: "+streamSum(PRODUCT_LIST.parallelStream(), predicate));
+        System.out.println("[parallelStreamSum]: " + streamSum(PRODUCT_LIST.parallelStream(), predicate));
         System.out.println((System.currentTimeMillis() - start) + " ms");
         System.out.println("======================================");
         start = System.currentTimeMillis();
-        System.out.println("[streamSum]: "+streamSum(PRODUCT_LIST.stream(), predicate));
+        System.out.println("[streamSum]: " + streamSum(PRODUCT_LIST.stream(), predicate));
         System.out.println((System.currentTimeMillis() - start) + " ms");
         System.out.println("======================================");
         start = System.currentTimeMillis();
-        System.out.println("[imperativeSum]: "+imperativeSum(PRODUCT_LIST, predicate));
+        System.out.println("[imperativeSum]: " + imperativeSum(PRODUCT_LIST, predicate));
         System.out.println((System.currentTimeMillis() - start) + " ms");
     }
 

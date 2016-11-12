@@ -115,19 +115,19 @@ public class Sample10 {
         System.out.println("[Funcational] result9 : " +
                 numbers.stream()
                         .filter(number -> {
-                            System.out.println("["+count.getAndAdd(1)+"][number > 3] number : " + number);
+                            System.out.println("[" + count.getAndAdd(1) + "][number > 3] number : " + number);
                             return number > 3;
                         })
                         .filter(number -> {
-                            System.out.println("["+count.getAndAdd(1)+"][number < 9] number : " + number);
+                            System.out.println("[" + count.getAndAdd(1) + "][number < 9] number : " + number);
                             return number < 9;
                         })
                         .map(number -> {
-                            System.out.println("["+count.getAndAdd(1)+"][number * 2] number : " + number);
+                            System.out.println("[" + count.getAndAdd(1) + "][number * 2] number : " + number);
                             return number * 2;
                         })
                         .filter(number -> {
-                            System.out.println("["+count.getAndAdd(1)+"][number > 10] number : " + number);
+                            System.out.println("[" + count.getAndAdd(1) + "][number > 10] number : " + number);
                             return number > 10;
                         })
                         .findFirst()
@@ -142,19 +142,19 @@ public class Sample10 {
         // stream 을 사용할 떄 보다 연산량이 많음.
         count.set(1);
         final List<Integer> greaterThan3 = filter(numbers, i -> {
-            System.out.println("["+count.getAndAdd(1)+"][i > 3] i : " + i);
+            System.out.println("[" + count.getAndAdd(1) + "][i > 3] i : " + i);
             return i > 3;
         });
         final List<Integer> lessThan9 = filter(greaterThan3, i -> {
-            System.out.println("["+count.getAndAdd(1)+"][i < 9] i :" + i);
+            System.out.println("[" + count.getAndAdd(1) + "][i < 9] i :" + i);
             return i < 9;
         });
         final List<Integer> doubled = map(lessThan9, i -> {
-            System.out.println("["+count.getAndAdd(1)+"][i * 2] i : " + i);
+            System.out.println("[" + count.getAndAdd(1) + "][i * 2] i : " + i);
             return i * 2;
         });
         final List<Integer> greaterThan10 = filter(doubled, i -> {
-            System.out.println("["+count.getAndAdd(1)+"][i > 10] i : " + i);
+            System.out.println("[" + count.getAndAdd(1) + "][i > 10] i : " + i);
             return i > 10;
         });
         System.out.println("greaterThan10 : " + greaterThan10.get(0));

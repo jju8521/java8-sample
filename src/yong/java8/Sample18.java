@@ -66,7 +66,7 @@ public class Sample18 {
         final Function<Integer, Integer> apply2 = apply1.apply(false);
         final Integer resultF3 = apply2.apply(50000);
 
-        System.out.println("\nresultF3 : "+resultF3);
+        System.out.println("\nresultF3 : " + resultF3);
     }
 
     private static <T, R> List<R> map(List<T> list, Function<T, R> mapper) {

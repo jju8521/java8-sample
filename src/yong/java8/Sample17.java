@@ -11,7 +11,7 @@ public class Sample17 {
         Something something = new Something(123);
 
         System.out.println(
-            something.equals(new Something(123))
+                something.equals(new Something(123))
         );
 
         final Map<Something, String> m = new HashMap<>();
@@ -31,10 +31,10 @@ public class Sample17 {
                 something.equals(new Something2(123))
         );
         System.out.println(
-                "something2.hashcode : "+something2.hashCode()
+                "something2.hashcode : " + something2.hashCode()
         );
         System.out.println(
-                "new Something2(123).hashcode : "+new Something2(123).hashCode()
+                "new Something2(123).hashcode : " + new Something2(123).hashCode()
         );
 
     }

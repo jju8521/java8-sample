@@ -1,7 +1,6 @@
 package yong.java8;
 
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
  * Created by yongju on 16. 9. 22.

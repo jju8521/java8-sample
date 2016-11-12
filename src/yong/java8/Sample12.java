@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -13,7 +12,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 /**
- * Created by yongju on 2016. 10. 15..
+ * Created by yongju on 2016. 10. 15.
  */
 public class Sample12 {
     public static void main(String[] args) {
@@ -30,48 +29,48 @@ public class Sample12 {
                 product5
         );
 
-        System.out.println("[price >= 30]\n"+
-            products.stream()
-                    .filter(product -> product.getPrice().compareTo(new BigDecimal("30")) >= 0)
-                    .collect(toList())
+        System.out.println("[price >= 30]\n" +
+                products.stream()
+                        .filter(product -> product.getPrice().compareTo(new BigDecimal("30")) >= 0)
+                        .collect(toList())
         );
 
         System.out.println("====================================");
-        System.out.println("[price >= 30]\n"+
-            products.stream()
-                    .filter(product -> product.getPrice().compareTo(new BigDecimal("30")) >= 0)
-                    .map(product -> product.toString())
-                    .collect(joining("\n"))
+        System.out.println("[price >= 30]\n" +
+                products.stream()
+                        .filter(product -> product.getPrice().compareTo(new BigDecimal("30")) >= 0)
+                        .map(product -> product.toString())
+                        .collect(joining("\n"))
         );
 
         System.out.println("====================================");
-        System.out.println("IntStream.sum : "+
-            IntStream.of(1, 2, 3, 4, 5).sum()
+        System.out.println("IntStream.sum : " +
+                IntStream.of(1, 2, 3, 4, 5).sum()
         );
 
         System.out.println("====================================");
-        System.out.println("[total price] : "+
+        System.out.println("[total price] : " +
 //            products.stream()
 //                    .reduce(BigDecimal.ZERO, (p1, p2) -> p1.getPrice().add(p2.getPrice()))
-            products.stream()
-                    .map(product -> product.getPrice())
-                    .reduce(BigDecimal.ZERO, (price1, price2) -> price1.add(price2))
+                        products.stream()
+                                .map(product -> product.getPrice())
+                                .reduce(BigDecimal.ZERO, (price1, price2) -> price1.add(price2))
 //                    .reduce(BigDecimal.ZERO, BigDecimal::add)
         );
 
         System.out.println("====================================");
-        System.out.println("[total price (price >= 30)] : "+
-            products.stream()
-                    .filter(product -> product.getPrice().compareTo(new BigDecimal("30")) >= 0)
-                    .map(product -> product.getPrice())
-                    .reduce(BigDecimal.ZERO, (price1, price2) -> price1.add(price2))
+        System.out.println("[total price (price >= 30)] : " +
+                products.stream()
+                        .filter(product -> product.getPrice().compareTo(new BigDecimal("30")) >= 0)
+                        .map(product -> product.getPrice())
+                        .reduce(BigDecimal.ZERO, (price1, price2) -> price1.add(price2))
         );
 
         System.out.println("====================================");
-        System.out.println("[# of products (price >= 30)] : "+
-            products.stream()
-                    .filter(product -> product.getPrice().compareTo(new BigDecimal("30")) >= 0)
-                    .count()
+        System.out.println("[# of products (price >= 30)] : " +
+                products.stream()
+                        .filter(product -> product.getPrice().compareTo(new BigDecimal("30")) >= 0)
+                        .count()
         );
 
         final OrderedItem item1 = new OrderedItem(1L, product1, 1);
@@ -83,10 +82,10 @@ public class Sample12 {
                 item2,
                 item3
         );
-       final Order order = new Order(1L, orderedItemList);
+        final Order order = new Order(1L, orderedItemList);
 
         System.out.println("====================================");
-        System.out.println("[total price ordered item] : "+order.totalPrice());
+        System.out.println("[total price ordered item] : " + order.totalPrice());
 
     }
 }
@@ -120,7 +119,7 @@ class Order {
     // compare sample07
     public BigDecimal totalPrice() {
         return items.stream()
-                    .map(item -> item.getTotalPrice())
-                    .reduce(BigDecimal.ZERO, (price1, price2) -> price1.add(price2));
+                .map(item -> item.getTotalPrice())
+                .reduce(BigDecimal.ZERO, (price1, price2) -> price1.add(price2));
     }
 }
