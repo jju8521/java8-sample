@@ -1,9 +1,13 @@
 package yong.java8;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -97,9 +101,13 @@ public class Sample19 {
 
         System.out.println();
         methodReference();
+
+        System.out.println();
+        methodReferenceConstructor();
     }
 
     private static void methodReference() {
+        System.out.println("[methodReference]");
         // First Class Function
 
         /**
@@ -177,10 +185,94 @@ public class Sample19 {
     private static String addHashPrefix(int number) {
         return "#" + number;
     }
+
+    private static void methodReferenceConstructor() {
+        System.out.println("[methodReferenceConstructor]");
+        final Section section = new Section(1);
+
+        final Function<Integer, Section> sectionFactoryWithLambdaExpression = i -> new Section(i);
+        final Section section2 = sectionFactoryWithLambdaExpression.apply(1);
+
+        System.out.println("section : "+section);
+        System.out.println("section2 : "+section2);
+
+        final Function<Integer, Section> sectionFactoryWithMethodReference = Section::new;
+        final Section section3 = sectionFactoryWithMethodReference.apply(5);
+        System.out.println("section3 : "+section3);
+
+        final Product product = new Product(1L, "A", new BigDecimal("100"));
+
+        final ProductCreator productCreator = Product::new;
+        final Product product1 = productCreator.creator(1L, "A,", new BigDecimal("100"));
+
+        System.out.println("\nproduct : "+product);
+        System.out.println("product1 : "+product1);
+
+        final ProductA productA = createProudct(1L, "A", new BigDecimal("123"), ProductA::new);
+        final ProductB productB = createProudct(1L, "A", new BigDecimal("123"), ProductB::new);
+
+        System.out.println("\nproductA : "+productA);
+        System.out.println("productB : "+productB);
+    }
+
+    private static <T extends Product> T createProudct(final Long id, final String name,
+                                                final BigDecimal price, final ProductCreator2<T> creator) {
+        if (id == null || id < 1) {
+            throw new IllegalArgumentException("The Id must be a positive Long. : "+id);
+        }
+
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("The name is not give. : "+name);
+        }
+
+        if (price == null || price.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("The price must be a greater than zero. : "+price);
+        }
+
+        return creator.creator(id, name, price);
+    }
+}
+
+@FunctionalInterface
+interface ProductCreator {
+    Product creator(Long id, String name, BigDecimal price);
+}
+
+@FunctionalInterface
+interface ProductCreator2<T extends Product> {
+    T creator(Long id, String name, BigDecimal price);
+}
+
+@AllArgsConstructor
+@Data
+class Section {
+    private int number;
 }
 
 class BigDecimalUtil {
     public static int compare(BigDecimal bd1, BigDecimal bd2) {
         return bd1.compareTo(bd2);
+    }
+}
+
+class ProductA extends Product {
+    public ProductA(Long id, String name, BigDecimal price) {
+        super(id, name, price);
+    }
+
+    @Override
+    public String toString() {
+        return "ProductA = " + super.toString();
+    }
+}
+
+class ProductB extends Product {
+    public ProductB(Long id, String name, BigDecimal price) {
+        super(id, name, price);
+    }
+
+    @Override
+    public String toString() {
+        return "ProductB = " + super.toString();
     }
 }
